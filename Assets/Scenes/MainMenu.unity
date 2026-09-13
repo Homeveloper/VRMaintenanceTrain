@@ -607,7 +607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WORKSHOP
+  m_text: "МАСТЕРСКАЯ"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
   m_sharedMaterial: {fileID: 8562704075330909273, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VR equipment maintenance trainer
+  m_text: "VR-тренажёр обслуживания оборудования"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
   m_sharedMaterial: {fileID: 8562704075330909273, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: "ВЫХОД"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
   m_sharedMaterial: {fileID: 8562704075330909273, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START
+  m_text: "НАЧАТЬ"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}
   m_sharedMaterial: {fileID: 8562704075330909273, guid: 8c474f8bfa0e8a74ba8fd09950932e22, type: 2}

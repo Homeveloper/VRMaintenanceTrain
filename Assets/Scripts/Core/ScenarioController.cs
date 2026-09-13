@@ -25,20 +25,20 @@ namespace VRMaintenanceTrainer
 
     internal sealed class PowerOffStep : IScenarioStep
     {
-        public string Hint => "Turn off the power with the lever";
+        public string Hint => "Отключите питание рубильником";
         public bool Accepts(in ScenarioAction action) => action.Type == ScenarioActionType.PowerOff;
     }
 
     internal sealed class InstallPartStep : IScenarioStep
     {
-        public string Hint => "Install the replacement part in the green socket";
+        public string Hint => "Установите сменную деталь в зелёное крепление";
         public bool Accepts(in ScenarioAction action) =>
             action.Type == ScenarioActionType.PartInstalled && action.SocketId == "replacement";
     }
 
     internal sealed class ApplyToolStep : IScenarioStep
     {
-        public string Hint => "Hold the tool in the work zone for 2 seconds";
+        public string Hint => "Удерживайте инструмент в рабочей зоне 2 секунды";
         public bool Accepts(in ScenarioAction action) => action.Type == ScenarioActionType.ToolApplied;
     }
 
@@ -53,7 +53,7 @@ namespace VRMaintenanceTrainer
 
         public int StepIndex => _stepIndex;
         public bool IsComplete => _stepIndex >= _steps.Length;
-        public string CurrentHint => IsComplete ? "Maintenance complete" : _steps[_stepIndex].Hint;
+        public string CurrentHint => IsComplete ? "Обслуживание завершено" : _steps[_stepIndex].Hint;
 
         private void Start() => StepChanged?.Invoke(CurrentHint);
 
@@ -65,8 +65,8 @@ namespace VRMaintenanceTrainer
             {
                 var detail = action.Type == ScenarioActionType.PartInstalled &&
                              _stepIndex == 1 && action.SocketId != "replacement"
-                    ? "Wrong socket. "
-                    : "Complete the steps in order. ";
+                    ? "Крепление не подходит. "
+                    : "Неверный порядок действий. ";
                 Mistake?.Invoke(detail + CurrentHint + ".");
                 return false;
             }

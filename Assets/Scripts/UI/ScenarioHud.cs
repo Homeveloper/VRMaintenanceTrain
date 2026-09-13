@@ -56,8 +56,8 @@ namespace VRMaintenanceTrainer
 
         private void ShowResult()
         {
-            if (instruction != null) instruction.text = "Maintenance complete";
-            if (result != null) result.text = "Task complete";
+            if (instruction != null) instruction.text = "Обслуживание завершено";
+            if (result != null) result.text = "Задание выполнено";
             if (resultPanel != null) resultPanel.SetActive(true);
         }
 

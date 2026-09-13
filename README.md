@@ -15,7 +15,7 @@ A short Unity 6 maintenance scenario for PC and XR. Turn off the power, fit a re
 2. Click the green replacement part, then the green socket. The red socket is incorrect. Right-click to put down a held part or tool.
 3. Click the tool, aim at the yellow work zone, and hold the left mouse button for two seconds.
 
-`Esc` returns to the main menu. The result screen also offers **Restart** and **Main Menu**.
+`Esc` returns to the main menu. The Russian-language result screen also offers **Заново** and **В меню**.
 
 ## Project structure
 
