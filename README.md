@@ -5,7 +5,7 @@ A short Unity 6 maintenance scenario for PC and XR. Turn off the power, fit a re
 ## Open and run
 
 - Unity version: **6000.5.9f1**.
-- Open `Assets/_Project/Scenes/MainMenu.unity` and enter Play Mode.
+- Open `Assets/Scenes/MainMenu.unity` and enter Play Mode.
 - In `Window > Asset Management > Addressables > Groups > Play Mode Script`, select **Use Asset Database (fastest)** for editor testing. `Workshop` is loaded using the address `Scenes/Workshop`.
 - For a Windows build, use **Tools > Build Windows Trainer**. This builds Addressables first and writes the player to `Builds/Windows/`. You can also build Addressables manually and then build the Windows player from Build Profiles.
 
@@ -19,11 +19,11 @@ A short Unity 6 maintenance scenario for PC and XR. Turn off the power, fit a re
 
 ## Project structure
 
-- `Assets/_Project/Scenes` contains the main menu and workshop.
-- `Assets/_Project/Scripts/Core` contains the ordered scenario rules.
-- `Assets/_Project/Scripts/Interactables` handles the lever, part, sockets, and tool.
-- `Assets/_Project/Scripts/App` handles desktop input, runtime mode, and scene loading.
-- `Assets/_Project/Scripts/UI` updates hints, progress, and the result screen.
+- `Assets/Scenes` contains the main menu and workshop.
+- `Assets/Scripts/Core` contains the ordered scenario rules.
+- `Assets/Scripts/Interactables` handles the lever, part, sockets, and tool.
+- `Assets/Scripts/App` handles desktop input, runtime mode, and scene loading.
+- `Assets/Scripts/UI` updates hints, progress, and the result screen.
 - `Assets/Editor/BuildWindows.cs` is an optional one-click Windows build command.
 
 The project uses OpenXR, the Input System, XR Interaction Toolkit, and Addressables. PC mode and the editor's XR Interaction Simulator have been used for testing. A physical VR headset has not been tested.

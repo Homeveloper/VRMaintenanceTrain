@@ -18,7 +18,7 @@ namespace VRMaintenanceTrainer.Editor
             Directory.CreateDirectory(Path.GetDirectoryName(output));
             var options = new BuildPlayerOptions
             {
-                scenes = new[] { "Assets/_Project/Scenes/MainMenu.unity" },
+                scenes = new[] { "Assets/Scenes/MainMenu.unity" },
                 locationPathName = output,
                 target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.None
