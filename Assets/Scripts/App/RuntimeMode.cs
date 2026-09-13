@@ -12,11 +12,8 @@ namespace VRMaintenanceTrainer
         private void Start()
         {
             bool useXR = XRSettings.isDeviceActive;
-
-#if UNITY_EDITOR
             useXR |= simulateXRInEditor;
-#endif
-
+            
             if (xrRig != null)
                 xrRig.SetActive(useXR);
 
