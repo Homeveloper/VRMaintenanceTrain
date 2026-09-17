@@ -8,6 +8,8 @@ namespace VRMaintenanceTrainer
     [RequireComponent(typeof(XRGrabInteractable))]
     public sealed class MaintenanceTool : MonoBehaviour
     {
+        private static readonly ScenarioAction ToolAction = new ScenarioAction(ScenarioActionType.ToolApplied);
+
         [SerializeField] private ScenarioController scenario;
         [SerializeField] private Transform tip;
         [SerializeField] private Transform workZone;
@@ -23,6 +25,7 @@ namespace VRMaintenanceTrainer
         private float _heldSeconds;
         private float _outOfZoneSeconds;
         private bool _complete;
+        private int _reportedEarlyStep = -1;
 
         public float Progress01 => Mathf.Clamp01(_heldSeconds / requiredSeconds);
         public event Action<float> ProgressChanged;
@@ -57,32 +60,61 @@ namespace VRMaintenanceTrainer
             _desktopActivated = activated;
         }
 
-        private void Update()
+        private void Update() => Advance(Time.deltaTime);
+
+        private void Advance(float deltaTime)
         {
             if (_complete) return;
             var xrInZone = tip != null && workZone != null &&
                            Vector3.Distance(tip.position, workZone.position) <= zoneRadius;
-            var active = (_xrHeld && _xrActivated && xrInZone) ||
-                         (_desktopHeld && _desktopActivated && _desktopAiming);
+            var xrEngaged = _xrHeld && _xrActivated;
+            var desktopEngaged = _desktopHeld && _desktopActivated;
+            var active = (xrEngaged && xrInZone) ||
+                         (desktopEngaged && _desktopAiming);
 
-            if (active)
+            if (!scenario.CanPerform(ToolAction))
+            {
+                ResetProgress();
+                if (active && _reportedEarlyStep != scenario.StepIndex)
+                {
+                    scenario.TryPerform(ToolAction);
+                    _reportedEarlyStep = scenario.StepIndex;
+                }
+                if (!active) _reportedEarlyStep = -1;
+                return;
+            }
+
+            _reportedEarlyStep = -1;
+
+            if (!xrEngaged && !desktopEngaged)
+            {
+                ResetProgress();
+            }
+            else if (active)
             {
                 _outOfZoneSeconds = 0f;
-                _heldSeconds += Time.deltaTime;
+                _heldSeconds += deltaTime;
             }
             else if (_heldSeconds > 0f)
             {
-                _outOfZoneSeconds += Time.deltaTime;
-                if (_outOfZoneSeconds > 0.18f) _heldSeconds = 0f;
+                _outOfZoneSeconds += deltaTime;
+                if (_outOfZoneSeconds > 0.18f) ResetProgress();
             }
 
             ProgressChanged?.Invoke(Progress01);
             if (_heldSeconds < requiredSeconds) return;
 
-            if (scenario.TryPerform(new ScenarioAction(ScenarioActionType.ToolApplied)))
+            if (scenario.TryPerform(ToolAction))
                 _complete = true;
             else
-                _heldSeconds = 0f;
+                ResetProgress();
+        }
+
+        private void ResetProgress()
+        {
+            _heldSeconds = 0f;
+            _outOfZoneSeconds = 0f;
+            ProgressChanged?.Invoke(0f);
         }
     }
 }

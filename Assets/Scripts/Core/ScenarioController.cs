@@ -55,13 +55,16 @@ namespace VRMaintenanceTrainer
         public bool IsComplete => _stepIndex >= _steps.Length;
         public string CurrentHint => IsComplete ? "Обслуживание завершено" : _steps[_stepIndex].Hint;
 
+        public bool CanPerform(in ScenarioAction action) =>
+            !IsComplete && _steps[_stepIndex].Accepts(action);
+
         private void Start() => StepChanged?.Invoke(CurrentHint);
 
         public bool TryPerform(in ScenarioAction action)
         {
             if (IsComplete) return false;
 
-            if (!_steps[_stepIndex].Accepts(action))
+            if (!CanPerform(action))
             {
                 var detail = action.Type == ScenarioActionType.PartInstalled &&
                              _stepIndex == 1 && action.SocketId != "replacement"
