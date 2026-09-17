@@ -12,7 +12,10 @@ namespace VRMaintenanceTrainer.Editor
         [MenuItem("Tools/Build Windows Trainer")]
         public static void Build()
         {
-            AddressableAssetSettings.BuildPlayerContent();
+            AddressableAssetSettings.BuildPlayerContent(out var addressablesResult);
+            if (addressablesResult == null || !string.IsNullOrEmpty(addressablesResult.Error))
+                throw new InvalidOperationException(
+                    $"Addressables build failed: {addressablesResult?.Error ?? "No build result"}");
 
             var output = Path.GetFullPath("Builds/Windows/VRMaintenanceTrainer.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(output));
